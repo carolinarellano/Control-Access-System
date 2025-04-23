@@ -1,0 +1,4 @@
+opencv-python
+deepface
+mysql-connector-python
+pytest

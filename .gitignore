@@ -1,0 +1,6 @@
+.idea/
+deepface_env/
+__pycache__/
+temp/
+*.pyc
+.env
