@@ -18,23 +18,37 @@ def run_app():
         match_name = "Unknown"
         color = (0, 0, 255)
 
-        for face in get_faces():
-            path = f"temp/temp_face_{face['id']}.jpg"
-            blob_to_image(face['image'], path)
+        faces = get_faces()
+        matched = False
 
-            try:
-                result = compare_faces(live_path, path)
-                if result['verified']:
-                    match_name = face['name']
-                    color = (0, 255, 0)
-                    break
-            except Exception as e:
-                print("Comparison error:", e)
+        for face in faces:
+            images = {
+                "front": face.get("front_image"),
+                "right": face.get("right_image"),
+                "left": face.get("left_image"),
+            }
+
+            for position, blob in images.items():
+                if blob:
+                    temp_path = f"temp/temp_face_{face['id']}_{position}.jpg"
+                    blob_to_image(blob, temp_path)
+
+                    try:
+                        result = compare_faces(live_path, temp_path)
+                        if result["verified"]:
+                            match_name = face["name"]
+                            color = (0, 255, 0)
+                            matched = True
+                            break
+                    except Exception as e:
+                        print("Error de comparación:", e)
+            if matched:
+                break
 
         cv2.putText(frame, match_name, (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, color, 2)
         cv2.imshow("Live Face Match", frame)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        if cv2.waitKey(1) & 0xFF == ord("q"):
             break
 
     cap.release()
