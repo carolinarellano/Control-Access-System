@@ -9,7 +9,7 @@ class TestIntegration(unittest.TestCase):
         reference_image = "face_database/caro.jpg"
 
         for face in get_faces():
-            is_caro = face['name'] == "carolinta"
+            is_caro = face['name'] == "Caro Test"
 
             for view in ["front_image", "right_image", "left_image"]:
                 if face.get(view):

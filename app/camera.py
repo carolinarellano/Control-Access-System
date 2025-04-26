@@ -1,5 +1,4 @@
 import cv2
-
 def capture_frame(save_path="temp/temp_frame.jpg"):
     cap = cv2.VideoCapture(0)
     ret, frame = cap.read()

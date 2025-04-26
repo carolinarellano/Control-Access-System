@@ -7,7 +7,7 @@ from deepface import DeepFace
 class TestFunctional(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.name = "Caro Funcional"
+        cls.name = "Test Funcional"
         cls.front_path = "face_database/func_front.jpg"
         cls.right_path = "face_database/func_right.jpg"
         cls.left_path = "face_database/func_left.jpg"
